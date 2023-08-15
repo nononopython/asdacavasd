@@ -11,7 +11,6 @@ import EditUser from './pages/User/EditUser';
 import AddUser from './pages/User/AddUser';
 import { API, getLogo, getSystemName, showError, showNotice } from './helpers';
 import PasswordResetForm from './components/PasswordResetForm';
-import PasswordResetForm2 from './components/PasswordResetForm2';
 import GitHubOAuth from './components/GitHubOAuth';
 import PasswordResetConfirm from './components/PasswordResetConfirm';
 import { UserContext } from './context/User';
@@ -30,7 +29,8 @@ const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
 
 function App() {
-
+  const [userState, userDispatch] = useContext(UserContext);
+  const [statusState, statusDispatch] = useContext(StatusContext);
 
   const loadUser = () => {
     let user = localStorage.getItem('user');
@@ -228,14 +228,6 @@ function App() {
         element={
           <Suspense fallback={<Loading></Loading>}>
             <PasswordResetForm />
-          </Suspense>
-        }
-      />
-      <Route
-        path='/reset2'
-        element={
-          <Suspense fallback={<Loading></Loading>}>
-            <PasswordResetForm2 />
           </Suspense>
         }
       />
